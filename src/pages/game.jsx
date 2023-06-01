@@ -137,21 +137,21 @@ sessionStorage.setItem('song', song);
         
       }
       const spawnEnemylevel1 = () => {
-        const enemy = { type: "level1", x: Math.random() * 500 + xshift, y: Math.random() * 500 + yshift, speed:0.8 };
+        const enemy = { type: "level1", x: Math.random() * 500 + xshift, y: Math.random() * 500 + yshift, speed:0 };
               
         setEnemies((prevEnemies) => [...prevEnemies, enemy]);
         return enemy;
       };
       const spawnEnemylevel2 = () => {
 
-        const enemy = {type : "level2", x: Math.random() * 500 + xshift, y: Math.random() * 500 + yshift, speed:0.5 }
+        const enemy = {type : "level2", x: Math.random() * 500 + xshift, y: Math.random() * 500 + yshift, speed:0 }
 
         setEnemies((prevEnemies) => [...prevEnemies, enemy]);
         return enemy;
       }
       const spawnEnemylevel3 = () => {
           
-          const enemy = {type : "level3", x: Math.random() * 500 + xshift, y: Math.random() * 500 + yshift, speed:1.3 }
+          const enemy = {type : "level3", x: Math.random() * 500 + xshift, y: Math.random() * 500 + yshift, speed:0 }
     
           setEnemies((prevEnemies) => [...prevEnemies, enemy]);
           return enemy;
