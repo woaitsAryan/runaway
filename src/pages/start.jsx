@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './start.css'
+import Parallax from './parallax.jsx';
 
 function StartPage({onStart }) {
   const [formData, setFormData] = useState({theme: '', novolume: false});
@@ -51,6 +52,7 @@ function StartPage({onStart }) {
 
   return (
     <div className="Final">
+      <Parallax />
       <img src="madeby.png" className="madeby" alt="madeby" />
       <div className="gameName">
         <a href="https://github.com/woaitsAryan/runaway" className='link' target="_blank">Runaway</a>
