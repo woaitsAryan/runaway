@@ -3,7 +3,7 @@ import './parallax.css';
 
 const Parallax = () => {
   const containerRef = useRef(null);
-  const offsetX = window.innerWidth / 2;  const offsetY = 239;
+  const offsetX = window.innerWidth / 2;
   const [mouseX, setMouseX] = useState(0);
 
   useEffect(() => {
