@@ -18,9 +18,9 @@ function EndPage({ gameData, score }) {
             <img src="replay.png" alt="replay" className="replaybtn"/>
         </button>
       <h3 className="scoreText">Your score is {score} in {gameData.theme}</h3>
-      <div className="ScoreContainer">
+      {/*<div className="ScoreContainer">
       <CustomGroupingTable />
-      </div>
+        </div>*/}
     </div>
   );
 }
