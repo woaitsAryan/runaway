@@ -151,7 +151,7 @@ sessionStorage.setItem('song', song);
       }
       const spawnEnemylevel3 = () => {
           
-          const enemy = {type : "level3", x: Math.random() * 500 + xshift, y: Math.random() * 500 + yshift, speed:1.3 }
+          const enemy = {type : "level3", x: Math.random() * 500 + xshift, y: Math.random() * 500 + yshift, speed:1.5 }
     
           setEnemies((prevEnemies) => [...prevEnemies, enemy]);
           return enemy;
@@ -193,11 +193,11 @@ sessionStorage.setItem('song', song);
     }, []);
     const getEnemyBackground = (type) => {
       if (type === "level1") {
-      return `${gameData.theme}/level1.png`;
+      return `${gameData.theme}/level1.webp`;
       } else if (type === "level3") {
-        return `${gameData.theme}/level3.png`;
+        return `${gameData.theme}/level3.webp`;
       } else if (type === "level2") {
-        return `${gameData.theme}/level2.png`;
+        return `${gameData.theme}/level2.webp`;
       };
     };
     if(gameOver){
@@ -220,7 +220,7 @@ sessionStorage.setItem('song', song);
           className = "playingarea" ref={playingAreaRef}
           >
             <img
-              src = {`${gameData.theme}/main.png`}
+              src = {`${gameData.theme}/main.webp`}
               alt = "mainplayer"
               className = "mainplayer"
               style={{

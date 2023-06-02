@@ -31,10 +31,10 @@ function StartPage({onStart }) {
 
 
     if (prevRef.current != null) {
-      prevRef.current.src = `options/noclick/${prevRef.current.id}.png`;    }
+      prevRef.current.src = `options/noclick/${prevRef.current.id}.webp`;    }
     prevRef.current = image;
 
-    image.src = `options/onclick/${value}.png`;
+    image.src = `options/onclick/${value}.webp`;
 
     setFormData({ ...formData, theme: value });
   };
@@ -53,7 +53,7 @@ function StartPage({onStart }) {
   return (
     <div className="Final">
       <Parallax />
-      <img src="madeby.png" className="madeby" alt="madeby" />
+      <img src="madeby.webp" className="madeby" alt="madeby" />
       <div className="gameName">
         <a href="https://github.com/woaitsAryan/runaway" className='link' target="_blank">Runaway</a>
       </div>
@@ -64,17 +64,17 @@ function StartPage({onStart }) {
         <div className="ButtonsContainer">
           <div className="Row">
             <button type="button" onClick={() => handleButtonClick('colleges')} className="btn">
-              <img src="options/noclick/colleges.png" className="btnimg" ref={collegesRef} id = "colleges" alt = "colleges"/>
+              <img src="options/noclick/colleges.webp" className="btnimg" ref={collegesRef} id = "colleges" alt = "colleges"/>
             </button>
             <button type="button" onClick={() => handleButtonClick('companies')} className="btn">
-              <img src="options/noclick/companies.png" className="btnimg" ref={companiesRef} id = "companies" alt = "companies"/>
+              <img src="options/noclick/companies.webp" className="btnimg" ref={companiesRef} id = "companies" alt = "companies"/>
             </button>
             <button type="button" onClick={() => handleButtonClick('programming')} className="btn">
-              <img src="options/noclick/programming.png" className="btnimg" ref={programmingRef} id = "programming" alt = "programming" />
+              <img src="options/noclick/programming.webp" className="btnimg" ref={programmingRef} id = "programming" alt = "programming" />
             </button>
           </div>
           <button type="submit" onClick={handleSubmit} className="start">
-            <img src="start.png" className="btnimg" alt="start" />
+            <img src="start.webp" className="btnimg" alt="start" />
           </button>
         </div>
       </div>
