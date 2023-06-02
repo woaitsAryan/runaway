@@ -13,7 +13,7 @@ function App() {
   };
 
   const handleEnd = (data) => {
-    // Do something with the final data if needed
+    // have the data
     setScore(data);
     
   };

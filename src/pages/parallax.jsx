@@ -5,7 +5,7 @@ const Parallax = () => {
   const containerRef = useRef(null);
   const offsetX = window.innerWidth / 2;
   const [mouseX, setMouseX] = useState(0);
-
+  const multipler = 1.6;
   useEffect(() => {
     const handleMouseMove = (event) => {
       setMouseX(event.clientX);
@@ -26,7 +26,7 @@ const Parallax = () => {
       <div
         className="layer water" 
         style={{
-          transform: `translate(${(mouseX - offsetX) * 0.010}px)`,
+          transform: `translate(${(mouseX - offsetX) * 0.010 * multipler}px)`,
           zIndex: -10,
         }}
       >
@@ -36,7 +36,7 @@ const Parallax = () => {
       <div
         className="layer"
         style={{
-          transform: `translate(${(mouseX - offsetX) * 0.001}px)`,
+          transform: `translate(${(mouseX - offsetX) * 0.001 *multipler}px)`,
           zIndex: -15,
         }}
       >
@@ -45,7 +45,7 @@ const Parallax = () => {
       <div
         className="layer"
         style={{
-          transform: `translate(${(mouseX - offsetX) * 0.002}px)`,
+          transform: `translate(${(mouseX - offsetX) * 0.002 * multipler}px)`,
           zIndex: -14,
         }}
       >
@@ -54,7 +54,7 @@ const Parallax = () => {
       <div
         className="layer"
         style={{
-          transform: `translate(${(mouseX - offsetX) * 0.003}px)`,
+          transform: `translate(${(mouseX - offsetX) * 0.003 * multipler}px)`,
           zIndex: -13,
         }}
       >
@@ -63,7 +63,7 @@ const Parallax = () => {
       <div
         className="layer"
         style={{
-          transform: `translate(${(mouseX - offsetX) * 0.004}px)`,
+          transform: `translate(${(mouseX - offsetX) * 0.004 * multipler}px)`,
           zIndex: -12,
         }}
       >
@@ -72,7 +72,7 @@ const Parallax = () => {
       <div
         className="layer"
         style={{
-          transform: `translate(${(mouseX - offsetX) * 0.006}px)`,
+          transform: `translate(${(mouseX - offsetX) * 0.006 * multipler}px)`,
           zIndex: -11,
         }}
       >
