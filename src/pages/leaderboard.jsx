@@ -8,7 +8,6 @@ import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import './end.css';
-import { blue } from '@mui/material/colors';
 
 const columns = [
   { id: 'name_runaway', label: 'username', minWidth: 100 },
