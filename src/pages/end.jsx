@@ -1,5 +1,5 @@
 import React from 'react';
-import CustomGroupingTable from './leaderboard.jsx';
+/*import CustomGroupingTable from './leaderboard.jsx';*/
 import './end.css';
 import { useNavigate } from 'react-router-dom';
 
