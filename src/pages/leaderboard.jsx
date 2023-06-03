@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState, useEffect } from 'react';
 import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,56 +7,113 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { initializeApp } from "firebase/app";
-import { getDatabase, ref, orderByChild, get} from "firebase/database";
-import dotenv from 'dotenv';
+import { initializeApp } from 'firebase/app';
+import { getDatabase, ref, update, push, get } from 'firebase/database';
 
-dotenv.config();
 
 const firebaseConfig = {
-  apiKey: process.env.API_KEY,
-  authDomain: process.env.AUTH_DOMAIN,
-  databaseURL: process.env.DATABASE_URL,
-  projectId: process.env.PROJECT_ID,
-  storageBucket: process.env.STORAGE_BUCKET,
-  messagingSenderId: process.env.MESSAGING_SENDER_ID,
-  appId: process.env.APP_ID,
-  measurementId: process.env.MEASUREMENT_ID
+  apiKey: "AIzaSyAmWPlGidQIb1EyQIdJ6uUXPIQ-NwraXn0",
+  authDomain: "runaway-2bfc1.firebaseapp.com",
+  databaseURL: "https://runaway-2bfc1-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "runaway-2bfc1",
+  storageBucket: "runaway-2bfc1.appspot.com",
+  messagingSenderId: "51732170222",
+  appId: "1:51732170222:web:f2e3e62df857ba8caefaff",
+  measurementId: "G-20ZYK4H6SF"
 };
+
 
 const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
-
 const leaderboardRef = ref(database, '/leaderboard');
-let rows = [];
-get(leaderboardRef)
-  .then((snapshot) => {
-    if (snapshot.exists()) {
-      const leaderboardData = snapshot.val();
-      rows = Object.entries(leaderboardData)
-        .map(([key, value]) => ({
-          name: value.name.toLowerCase(),
-          score: value.score
-        }))
-        .sort((a, b) => b.score - a.score);
 
-      console.log(rows);
-    } else {
-      console.log("No data available in the leaderboard");
-    }
-  })
-  .catch((error) => {
-    console.error("Error fetching leaderboard data:", error);
+function writeToLeaderboard(name, score) {
+  return new Promise((resolve, reject) => {
+    get(leaderboardRef)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const leaderboardData = snapshot.val();
+
+          let existingEntryKey = null;
+          for (const key in leaderboardData) {
+            if (leaderboardData[key].name === name) {
+              existingEntryKey = key;
+              break;
+            }
+          }
+
+          if (existingEntryKey) {
+            const existingScore = leaderboardData[existingEntryKey].score;
+
+            if (score > existingScore) {
+              update(leaderboardRef, {
+                [`${existingEntryKey}/score`]: score,
+              })
+                .then(() => {
+                  resolve();
+                })
+                .catch((error) => {
+                  reject(error);
+                });
+            } else {
+              resolve();
+            }
+          } else {
+            push(leaderboardRef, {
+              name: name,
+              score: score,
+            })
+              .then(() => {
+                resolve();
+              })
+              .catch((error) => {
+                reject(error);
+              });
+          }
+        } else {
+          resolve();
+        }
+      })
+      .catch((error) => {
+        reject(error);
+      });
   });
+}
 
 const columns = [
   { id: 'name', label: 'username', minWidth: 170 },
   { id: 'score', label: 'score', minWidth: 100 },
 ];
 
-export default function StickyHeadTable() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+export default function StickyHeadTable(props) {
+  let count = 0;
+  const [rows, setRows] = useState([]);
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
+  useEffect(() => {
+    count = count + 1;
+    if(count === 1){
+    writeToLeaderboard('david', props.propVariable)
+      .then(() => {
+        get(leaderboardRef)
+          .then((snapshot) => {
+            if (snapshot.exists()) {
+              const leaderboardData = snapshot.val();
+              const updatedRows = Object.entries(leaderboardData)
+                .map(([key, value]) => ({
+                  name: value.name.toLowerCase(),
+                  score: value.score,
+                }))
+                .sort((a, b) => b.score - a.score);
+
+              setRows(updatedRows);
+            } else {
+            }
+          })
+          
+      })
+      }
+  }, []);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);

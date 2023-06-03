@@ -9,9 +9,8 @@
     overflow: auto;
     width: 100%;
     padding: 16px;
-    border-bottom-left-radius: 15px; /* Add border radius to the bottom left corner */
-    border-bottom-right-radius: 15px; /* Add border radius to the bottom right corner */
-    
+    border-bottom-left-radius: 15px; 
+    border-bottom-right-radius: 15px; 
   }
 
 .Replay{

@@ -1,9 +1,7 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import CustomGroupingTable from './leaderboard.jsx';
 import './end.css';
 import { useNavigate } from 'react-router-dom';
-
-
 
 function EndPage({ gameData, score }) {
   const navigate =  useNavigate();
@@ -19,7 +17,7 @@ function EndPage({ gameData, score }) {
         </button>
       <h3 className="scoreText">Your score is {score} in {gameData.theme}</h3>
       <div className="ScoreContainer">
-          <CustomGroupingTable />
+          <CustomGroupingTable propVariable= {score}/>
         </div>
     </div>
   );
