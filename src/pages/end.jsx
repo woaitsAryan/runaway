@@ -1,5 +1,5 @@
 import React from 'react';
-/*import CustomGroupingTable from './leaderboard.jsx';*/
+import CustomGroupingTable from './leaderboard.jsx';
 import './end.css';
 import { useNavigate } from 'react-router-dom';
 
@@ -18,9 +18,9 @@ function EndPage({ gameData, score }) {
             <img src="replay.webp" alt="replay" className="replaybtn"/>
         </button>
       <h3 className="scoreText">Your score is {score} in {gameData.theme}</h3>
-      {/*<div className="ScoreContainer">
-      <CustomGroupingTable />
-        </div>*/}
+      <div className="ScoreContainer">
+          <CustomGroupingTable />
+        </div>
     </div>
   );
 }

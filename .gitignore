@@ -26,3 +26,11 @@ yarn-error.log*
 firebase.js
 package-lock.json
 package.json
+
+.env
+firebase.json
+.firebaserc
+firebase.mjs
+firebasewrite.mjs
+.github
+.firebase

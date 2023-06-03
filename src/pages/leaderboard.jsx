@@ -7,62 +7,54 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import './end.css';
+import { initializeApp } from "firebase/app";
+import { getDatabase, ref, orderByChild, get} from "firebase/database";
+import dotenv from 'dotenv';
+
+dotenv.config();
+
+const firebaseConfig = {
+  apiKey: process.env.API_KEY,
+  authDomain: process.env.AUTH_DOMAIN,
+  databaseURL: process.env.DATABASE_URL,
+  projectId: process.env.PROJECT_ID,
+  storageBucket: process.env.STORAGE_BUCKET,
+  messagingSenderId: process.env.MESSAGING_SENDER_ID,
+  appId: process.env.APP_ID,
+  measurementId: process.env.MEASUREMENT_ID
+};
+
+const app = initializeApp(firebaseConfig);
+const database = getDatabase(app);
+
+const leaderboardRef = ref(database, '/leaderboard');
+let rows = [];
+get(leaderboardRef)
+  .then((snapshot) => {
+    if (snapshot.exists()) {
+      const leaderboardData = snapshot.val();
+      rows = Object.entries(leaderboardData)
+        .map(([key, value]) => ({
+          name: value.name.toLowerCase(),
+          score: value.score
+        }))
+        .sort((a, b) => b.score - a.score);
+
+      console.log(rows);
+    } else {
+      console.log("No data available in the leaderboard");
+    }
+  })
+  .catch((error) => {
+    console.error("Error fetching leaderboard data:", error);
+  });
 
 const columns = [
-  { id: 'name_runaway', label: 'username', minWidth: 100 },
-  { id: 'score_runaway', label: 'score', minWidth: 50 },
-  {
-    id: 'name_asteroids',
-    label: 'username',
-    minWidth: 100,
-  },
-  {
-    id: 'score_asteroids',
-    label: 'score',
-    minWidth: 50,
-  },
-  {
-    id: 'name_corsairs',
-    label: 'username',
-    minWidth: 100,
-  },
-  {
-    id: 'score_corsairs',
-    label: 'score',
-    minWidth: 50,
-  },
-  {
-    id: 'name_fishy',
-    label: 'username',
-    minWidth: 100,
-  },
-  {
-    id: 'score_fishy',
-    label: 'score',
-    minWidth: 50,
-  },
-  {
-    id: 'name_tetris',
-    label: 'username',
-    minWidth: 100,
-  },
-  {
-    id: 'score_tetris',
-    label: 'score',
-    minWidth: 50,
-  },
+  { id: 'name', label: 'username', minWidth: 170 },
+  { id: 'score', label: 'score', minWidth: 100 },
 ];
 
-
-const rows = [
-  { name_runaway: 'John', score_runaway: 100, name_asteroids: 'John', score_asteroids: 100, name_corsairs: 'John', score_corsairs: 100, name_fishy: 'John', score_fishy: 100, name_tetris: 'John', score_tetris: 100 },
-  { name_runaway: 'Aryan', score_runaway: 100, name_asteroids: 'Aryan', score_asteroids: 100, name_corsairs: 'Aryan', score_corsairs: 100, name_fishy: 'Aryan', score_fishy: 100, name_tetris: 'Aryan', score_tetris: 100 },
-  { name_runaway : 'Manas', score_runaway: 100, name_asteroids: 'Manas', score_asteroids: 100, name_corsairs: 'Manas', score_corsairs: 100, name_fishy: 'Manas', score_fishy: 100, name_tetris: 'Manas', score_tetris: 100 },
-  
-];
-
-export default function ColumnGroupingTable() {
+export default function StickyHeadTable() {
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
@@ -76,36 +68,16 @@ export default function ColumnGroupingTable() {
   };
 
   return (
-    
-    <Paper sx={{ width: '100%' }}>
-      <TableContainer sx={{ maxHeight: 440 }} >
-        <Table stickyHeader aria-label="sticky table" class="row">
-          <TableHead >
-            <TableRow >
-              <TableCell align="center" colSpan={2}>
-                Runaway
-              </TableCell>
-              <TableCell align="center" colSpan={2}>
-                Asteroids
-              </TableCell>
-              <TableCell align="center" colSpan={2}>
-                Corsairs 
-              </TableCell>
-              <TableCell align="center" colSpan={2}>
-                Fishy 
-              </TableCell>
-              <TableCell align="center" colSpan={2}>
-                Tetris 
-              </TableCell>
-            </TableRow>
-            <TableRow >
+    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <TableContainer sx={{ maxHeight: 440 }}>
+        <Table stickyHeader aria-label="sticky table">
+          <TableHead>
+            <TableRow>
               {columns.map((column) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ top: 57, minWidth: column.minWidth,
-                            
-                   }}
+                  style={{ minWidth: column.minWidth }}
                 >
                   {column.label}
                 </TableCell>
