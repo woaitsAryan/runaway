@@ -4,7 +4,7 @@ import './start.css'
 import Parallax from './parallax.jsx';
 
 function StartPage({onStart }) {
-  const [formData, setFormData] = useState({theme: '', novolume: false});
+  const [formData, setFormData] = useState({theme: '', novolume: false, username: ''});
   const navigate =  useNavigate();
   const prevRef = useRef(null);
   const collegesRef = useRef(null);
@@ -39,17 +39,26 @@ function StartPage({onStart }) {
     setFormData({ ...formData, theme: value });
   };
   
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    if(formData.theme !== ''){
-      onStart(formData);
+  
+    if (formData.theme !== '') {
+      let name = prompt("Kindly enter your username");
+      const updatedFormData = { ...formData, username: name };
+  
+      await new Promise((resolve) => {
+        setFormData(updatedFormData);
+        resolve();
+      });
+  
+      onStart(updatedFormData);
+      console.log(updatedFormData);
       navigate('/game');
-    }
-    else{
+    } else {
       alert("Please select a theme");
     }
   };
-
+  
   return (
     <div className="Final">
       <Parallax />

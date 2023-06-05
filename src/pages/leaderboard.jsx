@@ -93,7 +93,7 @@ export default function StickyHeadTable(props) {
   useEffect(() => {
     count = count + 1;
     if(count === 1){
-    writeToLeaderboard('david', props.propVariable)
+    writeToLeaderboard(props.usernameprop, props.propVariable)
       .then(() => {
         get(leaderboardRef)
           .then((snapshot) => {

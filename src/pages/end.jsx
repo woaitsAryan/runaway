@@ -15,9 +15,9 @@ function EndPage({ gameData, score }) {
        <button type="submit" onClick={redirect} className="Replay">
             <img src="replay.webp" alt="replay" className="replaybtn"/>
         </button>
-      <h3 className="scoreText">Your score is {score} in {gameData.theme}</h3>
+      <h3 className="scoreText">{gameData.username}'s score is {score} in {gameData.theme}</h3>
       <div className="ScoreContainer">
-          <CustomGroupingTable propVariable= {score}/>
+          <CustomGroupingTable propVariable= {score} usernameprop = {gameData.username}/>
         </div>
     </div>
   );
