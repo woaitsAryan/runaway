@@ -43,7 +43,7 @@ function StartPage({onStart }) {
     event.preventDefault();
   
     if (formData.theme !== '') {
-      let name = prompt("Kindly enter your username");
+      let name = prompt("Kindly enter your username  (move your player with touchpad/mouse)");
       const updatedFormData = { ...formData, username: name };
   
       await new Promise((resolve) => {
@@ -64,7 +64,7 @@ function StartPage({onStart }) {
       <Parallax />
       <img src="madeby.webp" className="madeby" alt="madeby" />
       <div className="gameName">
-        <a href="https://github.com/woaitsAryan/runaway" className='link' target="_blank">Runaway</a>
+        <a href="https://github.com/woaitsAryan/runaway-deploy" className='link' target="_blank">Runaway</a>
       </div>
       <button onClick={handlevolume} className={`volume ${isClicked ? 'strike-through' : ''}` }>
       Sound
