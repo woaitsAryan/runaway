@@ -16,9 +16,9 @@ function EndPage({ gameData, score }) {
             <img src="replay.webp" alt="replay" className="replaybtn"/>
         </button>
       <h3 className="scoreText">{gameData.username}'s score is {score} in {gameData.theme}</h3>
-      <div className="ScoreContainer">
+      {/* <div className="ScoreContainer">
           <CustomGroupingTable propVariable= {score} usernameprop = {gameData.username}/>
-        </div>
+        </div> */}
     </div>
   );
 }
